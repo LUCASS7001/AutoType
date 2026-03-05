@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="800" height="300">
+  <defs>
+    <style>
+      .bg { fill: #1e1e1e; rx: 12px; }
+      .header { fill: #2d2d2d; rx: 12px; }
+      .dot-red { fill: #FF5F56; }
+      .dot-yellow { fill: #FFBD2E; }
+      .dot-green { fill: #27C93F; }
+      
+      .text {
+        font-family: 'Consolas', 'Courier New', monospace;
+        font-size: 18px;
+        fill: #d4d4d4;
+      }
+      .keyword { fill: #569cd6; }
+      .string { fill: #ce9178; }
+      .function { fill: #dcdcaa; }
+      .comment { fill: #6a9955; }
+      
+      .cursor {
+        fill: #d4d4d4;
+        animation: blink 1s step-end infinite;
+      }
+
+      /* Typywriter effect */
+      .line1, .line2, .line3, .line4 {
+        opacity: 0;
+      }
+      
+      .line1 { animation: type 0.1s forwards 1s; }
+      .line2 { animation: type 0.1s forwards 2.5s; }
+      .line3 { animation: type 0.1s forwards 4s; }
+      .line4 { animation: type 0.1s forwards 6s; }
+
+      .cursor-l1 { animation: cursorMove 1.5s steps(30) forwards 1s, hideCursor 0.1s forwards 2.5s; }
+      .cursor-l2 { opacity: 0; animation: showCursor 0.1s forwards 2.5s, cursorMove 1.5s steps(20) forwards 2.5s, hideCursor 0.1s forwards 4s; }
+      .cursor-l3 { opacity: 0; animation: showCursor 0.1s forwards 4s, cursorMove 2s steps(40) forwards 4s, hideCursor 0.1s forwards 6s; }
+      .cursor-l4 { opacity: 0; animation: showCursor 0.1s forwards 6s; }
+
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+      @keyframes type {
+        to { opacity: 1; }
+      }
+      @keyframes showCursor {
+        to { opacity: 1; }
+      }
+      @keyframes hideCursor {
+        to { opacity: 0; }
+      }
+      @keyframes cursorMove {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(100%); }
+      }
+
+      /* Typing clip paths to reveal text */
+      .clip-line1 { clip-path: inset(0 100% 0 0); animation: wipe 1.5s steps(30) forwards 1s; }
+      .clip-line2 { clip-path: inset(0 100% 0 0); animation: wipe 1.5s steps(20) forwards 2.5s; }
+      .clip-line3 { clip-path: inset(0 100% 0 0); animation: wipe 2s steps(40) forwards 4s; }
+      .clip-line4 { opacity: 0; animation: type 0.1s forwards 6s; }
+      
+      @keyframes wipe {
+        to { clip-path: inset(0 0 0 0); }
+      }
+
+    </style>
+  </defs>
+
+  <!-- Background Editor Window -->
+  <rect class="bg" width="100%" height="100%" />
+  
+  <!-- Header Bar -->
+  <path class="header" d="M0 12 C0 5.373 5.373 0 12 0 L788 0 C794.627 0 800 5.373 800 12 L800 40 L0 40 Z" />
+  
+  <!-- Mac OS Dots -->
+  <circle class="dot-red" cx="20" cy="20" r="6" />
+  <circle class="dot-yellow" cx="40" cy="20" r="6" />
+  <circle class="dot-green" cx="60" cy="20" r="6" />
+  
+  <!-- File Title -->
+  <text x="400" y="25" fill="#888" font-family="sans-serif" font-size="14" text-anchor="middle">extension.ts — AutoType</text>
+
+  <!-- Code Body -->
+  <g transform="translate(40, 90)">
+    
+    <!-- Line 1 -->
+    <g class="line1">
+      <g class="clip-line1">
+        <text class="text" y="0">
+          <tspan class="comment">// 3... 2... 1... AutoType initializing</tspan>
+        </text>
+      </g>
+      <!-- Cursor width logic: text is ~380px wide -->
+      <g transform="translate(0, -15)">
+        <rect class="cursor cursor-l1" width="10" height="20" />
+      </g>
+    </g>
+
+    <!-- Line 2 -->
+    <g class="line2" transform="translate(0, 40)">
+      <g class="clip-line2">
+        <text class="text" y="0">
+          <tspan class="keyword">import</tspan> { <tspan class="function">simulateHuman</tspan> } <tspan class="keyword">from</tspan> <tspan class="string">'@autotype/core'</tspan>;
+        </text>
+      </g>
+      <g transform="translate(0, -15)">
+        <rect class="cursor cursor-l2" width="10" height="20" />
+      </g>
+    </g>
+
+    <!-- Line 3 -->
+    <g class="line3" transform="translate(0, 80)">
+      <g class="clip-line3">
+        <text class="text" y="0">
+          <tspan class="keyword">await</tspan> <tspan class="function">simulateHuman</tspan>({ <tspan class="keyword">speed</tspan>: <tspan class="string">'fast'</tspan>, <tspan class="keyword">typos</tspan>: <tspan class="keyword">true</tspan> });
+        </text>
+      </g>
+      <g transform="translate(0, -15)">
+        <rect class="cursor cursor-l3" width="10" height="20" />
+      </g>
+    </g>
+
+    <!-- Line 4 (Finished state) -->
+    <g class="line4" transform="translate(0, 140)">
+      <text class="text" y="0">
+        <tspan class="comment">/* Perfect for screen recordings. */</tspan>
+      </text>
+      <rect class="cursor cursor-l4" x="400" y="-15" width="10" height="20" />
+    </g>
+
+  </g>
+</svg>

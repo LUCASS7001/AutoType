@@ -1,0 +1,141 @@
+{
+  "name": "autotype",
+  "displayName": "AutoType",
+  "description": "Simulate human-like code typing in VS Code for screen recordings and content creation",
+  "version": "1.0.0",
+  "publisher": "khalildev",
+  "icon": "Logo.png",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LUCASS7001/AutoType"
+  },
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "typing",
+    "simulation",
+    "screen recording",
+    "content creation",
+    "demo"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "autotype.fromClipboard",
+        "title": "AutoType: Type from Clipboard"
+      },
+      {
+        "command": "autotype.fromFile",
+        "title": "AutoType: Type from File"
+      },
+      {
+        "command": "autotype.typeContextFile",
+        "title": "AutoType: Type This File"
+      },
+      {
+        "command": "autotype.retypeSelection",
+        "title": "AutoType: Retype Selection"
+      },
+      {
+        "command": "autotype.setSpeed",
+        "title": "AutoType: Set Speed"
+      },
+      {
+        "command": "autotype.stop",
+        "title": "AutoType: Stop"
+      }
+    ],
+    "submenus": [
+      {
+        "id": "autotype.menu",
+        "label": "AutoType"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "submenu": "autotype.menu",
+          "group": "modification"
+        }
+      ],
+      "autotype.menu": [
+        {
+          "command": "autotype.fromClipboard",
+          "group": "1_typing"
+        },
+        {
+          "command": "autotype.retypeSelection",
+          "group": "1_typing"
+        },
+        {
+          "command": "autotype.stop",
+          "group": "2_stop"
+        }
+      ],
+      "explorer/context": [
+        {
+          "when": "resourceExtname =~ /\\.(js|ts|jsx|tsx|html|css|py)$/",
+          "command": "autotype.typeContextFile",
+          "group": "2_workspace"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "autotype.stop",
+        "key": "escape",
+        "when": "autotype.isTyping"
+      },
+      {
+        "command": "autotype.fromClipboard",
+        "key": "ctrl+shift+alt+v",
+        "mac": "cmd+shift+alt+v",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "autotype.fromFile",
+        "key": "ctrl+shift+alt+f",
+        "mac": "cmd+shift+alt+f",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "autotype.retypeSelection",
+        "key": "ctrl+shift+alt+r",
+        "mac": "cmd+shift+alt+r",
+        "when": "editorHasSelection"
+      }
+    ],
+    "configuration": {
+      "title": "AutoType",
+      "properties": {
+        "autotype.speed": {
+          "type": "number",
+          "default": 80,
+          "description": "Base typing speed in milliseconds per character"
+        },
+        "autotype.typoChance": {
+          "type": "number",
+          "default": 0.03,
+          "description": "Chance (0.0 to 1.0) of making a deliberate typo that gets auto-corrected"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.3",
+    "@types/vscode": "^1.74.0",
+    "typescript": "^5.3.0"
+  }
+}
