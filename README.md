@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="banner.svg" alt="AutoType Banner" width="800">
+  <img src="banner.png" alt="AutoType Banner" width="100%">
 </h1>
 
 <h3 align="center">

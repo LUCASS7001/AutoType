@@ -1,6 +1,6 @@
 {
-  "name": "autotype",
-  "displayName": "AutoType",
+  "name": "khalil-autotype",
+  "displayName": "AutoType Pro",
   "description": "Simulate human-like code typing in VS Code for screen recordings and content creation",
   "version": "1.0.0",
   "publisher": "khalildev",
