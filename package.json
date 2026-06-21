@@ -1,146 +1,27 @@
 {
-  "name": "khalil-autotype",
-  "displayName": "AutoType Pro",
-  "description": "Simulate human-like code typing in VS Code for screen recordings and content creation",
-  "version": "1.0.3",
-  "publisher": "khalildev",
-  "icon": "Logo.png",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/LUCASS7001/AutoType"
+  "name": "autotype-recorder",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Intent-first cinematic code recording for VS Code",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @autotype/studio",
+    "dev:web": "npm run dev:web -w @autotype/studio",
+    "build": "npm run check -w @autotype/core && npm run build -w @autotype/vscode-extension && npm run build -w @autotype/studio",
+    "test": "npm run test -w @autotype/core && npm run test -w @autotype/studio",
+    "check": "npm run check -w @autotype/core && npm run check -w @autotype/vscode-extension && npm run check -w @autotype/studio",
+    "package:extension": "npm run package -w @autotype/vscode-extension"
   },
   "engines": {
-    "vscode": "^1.74.0"
+    "node": ">=20.19"
   },
-  "categories": [
-    "Other"
-  ],
-  "keywords": [
-    "typing",
-    "simulation",
-    "screen recording",
-    "content creation",
-    "demo"
-  ],
-  "activationEvents": [],
-  "main": "./out/extension.js",
-  "contributes": {
-    "commands": [
-      {
-        "command": "autotype.fromClipboard",
-        "title": "AutoType: Type from Clipboard"
-      },
-      {
-        "command": "autotype.fromFile",
-        "title": "AutoType: Type from File"
-      },
-      {
-        "command": "autotype.typeContextFile",
-        "title": "AutoType: Type This File"
-      },
-      {
-        "command": "autotype.retypeSelection",
-        "title": "AutoType: Retype Selection"
-      },
-      {
-        "command": "autotype.setSpeed",
-        "title": "AutoType: Set Speed"
-      },
-      {
-        "command": "autotype.stop",
-        "title": "AutoType: Stop"
-      }
-    ],
-    "submenus": [
-      {
-        "id": "autotype.menu",
-        "label": "AutoType"
-      }
-    ],
-    "menus": {
-      "editor/context": [
-        {
-          "submenu": "autotype.menu",
-          "group": "modification"
-        }
-      ],
-      "autotype.menu": [
-        {
-          "command": "autotype.fromClipboard",
-          "group": "1_typing"
-        },
-        {
-          "command": "autotype.retypeSelection",
-          "group": "1_typing"
-        },
-        {
-          "command": "autotype.stop",
-          "group": "2_stop"
-        }
-      ],
-      "explorer/context": [
-        {
-          "when": "resourceExtname =~ /\\.(js|ts|jsx|tsx|html|css|py)$/",
-          "command": "autotype.typeContextFile",
-          "group": "2_workspace"
-        }
-      ]
-    },
-    "keybindings": [
-      {
-        "command": "autotype.stop",
-        "key": "escape",
-        "when": "autotype.isTyping"
-      },
-      {
-        "command": "autotype.fromClipboard",
-        "key": "ctrl+shift+alt+v",
-        "mac": "cmd+shift+alt+v",
-        "when": "editorTextFocus"
-      },
-      {
-        "command": "autotype.fromFile",
-        "key": "ctrl+shift+alt+f",
-        "mac": "cmd+shift+alt+f",
-        "when": "editorTextFocus"
-      },
-      {
-        "command": "autotype.retypeSelection",
-        "key": "ctrl+shift+alt+r",
-        "mac": "cmd+shift+alt+r",
-        "when": "editorHasSelection"
-      }
-    ],
-    "configuration": {
-      "title": "AutoType",
-      "properties": {
-        "autotype.speed": {
-          "type": "number",
-          "default": 80,
-          "description": "Base typing speed in milliseconds per character"
-        },
-        "autotype.typoChance": {
-          "type": "number",
-          "default": 0.03,
-          "description": "Chance (0.0 to 1.0) of making a deliberate typo that gets auto-corrected"
-        },
-        "autotype.autoScroll": {
-          "type": "boolean",
-          "default": true,
-          "description": "Automatically scroll the editor to keep the current typing line visible"
-        }
-      }
-    }
-  },
-  "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./"
-  },
-  "devDependencies": {
-    "@types/node": "^25.3.3",
-    "@types/vscode": "^1.74.0",
-    "typescript": "^5.3.0"
+  "allowScripts": {
+    "electron@37.10.3": true,
+    "esbuild@0.28.1": true,
+    "esbuild@0.25.12": true,
+    "esbuild@0.27.7": true
   }
 }

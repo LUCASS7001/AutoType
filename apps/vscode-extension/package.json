@@ -1,0 +1,68 @@
+{
+  "name": "autotype-recorder-extension",
+  "displayName": "AutoType Recorder",
+  "description": "Capture code editing intent for cinematic AutoType Recorder videos",
+  "version": "2.0.0",
+  "private": true,
+  "publisher": "khalildev",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.94.0"
+  },
+  "categories": ["Other"],
+  "keywords": ["recording", "code video", "cinematic", "timeline"],
+  "activationEvents": [
+    "onCommand:autotypeRecorder.start",
+    "onCommand:autotypeRecorder.stop",
+    "onCommand:autotypeRecorder.export"
+  ],
+  "main": "./dist/extension.cjs",
+  "contributes": {
+    "commands": [
+      { "command": "autotypeRecorder.start", "title": "AutoType Recorder: Start Recording", "icon": "$(record)" },
+      { "command": "autotypeRecorder.stop", "title": "AutoType Recorder: Stop Recording", "icon": "$(debug-stop)" },
+      { "command": "autotypeRecorder.export", "title": "AutoType Recorder: Export Last Session" }
+    ],
+    "keybindings": [
+      { "command": "autotypeRecorder.start", "key": "ctrl+alt+r", "mac": "cmd+alt+r", "when": "!autotypeRecorder.isRecording" },
+      { "command": "autotypeRecorder.stop", "key": "ctrl+alt+r", "mac": "cmd+alt+r", "when": "autotypeRecorder.isRecording" }
+    ],
+    "menus": {
+      "commandPalette": [
+        { "command": "autotypeRecorder.start", "when": "!autotypeRecorder.isRecording" },
+        { "command": "autotypeRecorder.stop", "when": "autotypeRecorder.isRecording" }
+      ]
+    },
+    "configuration": {
+      "title": "AutoType Recorder",
+      "properties": {
+        "autotypeRecorder.captureUntitled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include untitled editors in recordings."
+        },
+        "autotypeRecorder.redactWorkspacePath": {
+          "type": "boolean",
+          "default": true,
+          "description": "Exclude the absolute workspace path from exported sessions."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "check": "tsc --noEmit",
+    "package": "vsce package --no-dependencies"
+  },
+  "dependencies": {
+    "@autotype/core": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.94.0",
+    "@vscode/vsce": "^3.6.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.0"
+  }
+}

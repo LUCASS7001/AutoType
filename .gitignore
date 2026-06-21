@@ -1,0 +1,8 @@
+node_modules/
+dist/
+coverage/
+*.log
+*.autotype.json
+apps/studio/release/
+apps/vscode-extension/*.vsix
+.DS_Store
